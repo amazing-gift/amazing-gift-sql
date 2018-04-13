@@ -28,9 +28,7 @@ public class SqlSession {
 			connection = dataSource.getConnection();
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			if (preparedStatementHandler != null) {
-				preparedStatementHandler.handle(preparedStatement);
-			}
+			preparedStatementHandler.handle(preparedStatement);
 
 			return preparedStatement.executeUpdate();
 
@@ -61,9 +59,7 @@ public class SqlSession {
 			connection.setAutoCommit(false);
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			if (preparedStatementHandler != null) {
-				preparedStatementHandler.handle(preparedStatement);
-			}
+			preparedStatementHandler.handle(preparedStatement);
 
 			int[] resultCounts = preparedStatement.executeBatch();
 			int totalCount = 0;
@@ -98,17 +94,11 @@ public class SqlSession {
 			connection = dataSource.getConnection();
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			if (preparedStatementHandler != null) {
-				preparedStatementHandler.handle(preparedStatement);
-			}
+			preparedStatementHandler.handle(preparedStatement);
 
-			int resultCount = 0;
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if (resultSetHandler != null) {
-				resultCount = resultSetHandler.handle(resultSet);
-			}
 
-			return resultCount;
+			return resultSetHandler.handle(resultSet);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
